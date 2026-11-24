@@ -1,0 +1,58 @@
+[project]
+name = "pianofilter"
+dynamic = ["version"]
+description = "Check and trim solo piano cover recordings against the original song"
+readme = "README.md"
+authors = [
+    { name = "Komiya Kazuma", email = "90894519+310hz@users.noreply.github.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "librosa>=0.11",
+    "numba>=0.61",
+    "numpy>=2.0",
+    "safetensors>=0.5",
+    "torch>=2.6",
+    "torchaudio>=2.6",
+    "typer>=0.15",
+]
+
+[project.scripts]
+pianofilter = "pianofilter.cli:app"
+
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "vcs"
+tag-pattern = "^v(?P<version>.+)$"
+fallback-version = "0.0.0"
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.lint]
+select = [
+    "E", "W", "F", "I", "B", "UP", "PTH", "ERA001", "TID251", "D209", "D213",
+    "D1", "D417",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D1"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 72
+
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+"__future__.annotations".msg = "Do not use `from __future__ import annotations`."
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "ruff>=0.17.6",
+    "ty>=0.0.109",
+]
