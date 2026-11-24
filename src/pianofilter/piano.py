@@ -18,6 +18,7 @@ from safetensors.torch import load_file
 from torch import nn
 
 from pianofilter.audio import SAMPLE_RATE, load_audio
+from pianofilter.features import WINDOW_SECONDS
 
 WEIGHTS_URL = (
     "https://storage.googleapis.com/aria-checkpoints/cl/large-0.1.safetensors"
@@ -25,7 +26,6 @@ WEIGHTS_URL = (
 WEIGHTS_SHA256 = (
     "94d9609d358f9895159fe4f83620bb64286a4f9045fd16079b4feaca984e2a75"
 )
-WINDOW_SECONDS = 5.0
 HOP_SECONDS = 1.0
 
 _N_FFT = 2048

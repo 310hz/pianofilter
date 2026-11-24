@@ -5,8 +5,12 @@ from dataclasses import asdict, dataclass
 import numpy as np
 
 from pianofilter.align import align, end_scores
-from pianofilter.features import CHROMA_SECONDS, RMS_SECONDS, Features
-from pianofilter.piano import WINDOW_SECONDS
+from pianofilter.features import (
+    CHROMA_SECONDS,
+    RMS_SECONDS,
+    WINDOW_SECONDS,
+    Features,
+)
 
 
 @dataclass(frozen=True)

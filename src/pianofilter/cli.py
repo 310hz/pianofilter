@@ -8,7 +8,6 @@ import typer
 from pianofilter.analyze import analyze
 from pianofilter.features import extract_features
 from pianofilter.judge import judge
-from pianofilter.piano import PianoScorer
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 app = typer.Typer(
@@ -42,6 +41,8 @@ def compare(
     device: str | None = DEVICE_OPTION,
 ) -> None:
     """Compare a piano cover with its original and print JSON."""
+    from pianofilter.piano import PianoScorer
+
     scorer = PianoScorer(fpath_weights, device)
     analysis = analyze(
         extract_features(fpath_original, scorer),
@@ -58,6 +59,8 @@ def piano(
     device: str | None = DEVICE_OPTION,
 ) -> None:
     """Print the solo piano score of each second of a file."""
+    from pianofilter.piano import PianoScorer
+
     scorer = PianoScorer(fpath_weights, device)
     scores = scorer.score_file(fpath_audio)
     for second, score in enumerate(scores):
