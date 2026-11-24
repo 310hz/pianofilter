@@ -2,15 +2,12 @@
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING
 
 import librosa
 import numpy as np
 
 from pianofilter.audio import SAMPLE_RATE, load_audio
-
-if TYPE_CHECKING:
-    from pianofilter.piano import PianoScorer
+from pianofilter.piano import PianoScorer
 
 _HOP_LENGTH = 512
 _CHROMA_STEP = 8
@@ -18,7 +15,6 @@ _CENS_SMOOTH = 41
 
 RMS_SECONDS = _HOP_LENGTH / SAMPLE_RATE
 CHROMA_SECONDS = RMS_SECONDS * _CHROMA_STEP
-WINDOW_SECONDS = 5.0
 
 
 @dataclass(frozen=True)
@@ -79,7 +75,7 @@ class Features:
 
 
 def features_from_samples(
-    samples: np.ndarray, scorer: "PianoScorer | None" = None
+    samples: np.ndarray, scorer: PianoScorer | None = None
 ) -> Features:
     """
     Compute features from a decoded signal.
@@ -110,7 +106,7 @@ def features_from_samples(
 
 
 def extract_features(
-    fpath_audio: Path, scorer: "PianoScorer | None" = None
+    fpath_audio: Path, scorer: PianoScorer | None = None
 ) -> Features:
     """
     Decode an audio file and compute its features.
